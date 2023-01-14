@@ -42,9 +42,4 @@ public class GuestRequest {
     @NotNull(message = "O telefone não pode ser nulo")
     @NotBlank(message = "O telefone não pode estar vazio")
     private String phone;
-
-    @Schema(description = "Endereço")
-    @NotNull(message = "O endereço não pode ser nulo")
-    private List<AddressRequest> guestAddress;
-
 }

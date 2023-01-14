@@ -1,6 +1,7 @@
 package com.company.hotelaria.hotel.annotation.employee;
 
 import com.company.hotelaria.hotel.annotation.guest.ConstantsGuest;
+import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
 import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
@@ -20,7 +21,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Retorna o funcionário buscado pelo cpf",
-                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = EmployeeResponse.class))),
+                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = EmployeeFullResponse.class))),
         @ApiResponse(responseCode = "404", description = "CPF não cadastrado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })

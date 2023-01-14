@@ -2,6 +2,7 @@ package com.company.hotelaria.hotel.tests.guestTests;
 
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.controller.GuestController;
+import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
 import com.company.hotelaria.hotel.service.GuestService;
@@ -23,8 +24,8 @@ public class GuestControllerTests {
         GuestService guestService = mock(GuestService.class);
         GuestController guestController = new GuestController(guestService);
 
-        when(guestService.findBySocialSecurityNumber(anyString())).thenReturn(guestBuilder.novoGuestResponse());
-        ResponseEntity<GuestResponse> guestResponse = guestController.findBySocialSecurityNumber(String.valueOf(1));
+        when(guestService.findBySocialSecurityNumber(anyString())).thenReturn(guestBuilder.novoGuestFullResponse());
+        ResponseEntity<GuestFullResponse> guestResponse = guestController.findBySocialSecurityNumber(String.valueOf(1));
 
         Assertions.assertEquals(guestResponse.getBody().getId(), guestBuilder.novoGuestResponse().getId());
         Assertions.assertEquals(guestResponse.getBody().getName(), guestBuilder.novoGuestResponse().getName());
@@ -32,8 +33,8 @@ public class GuestControllerTests {
         Assertions.assertEquals(guestResponse.getBody().getDateOfBirth(),guestBuilder.novoGuestResponse().getDateOfBirth());
         Assertions.assertEquals(guestResponse.getBody().getEmail(), guestBuilder.novoGuestResponse().getEmail());
         Assertions.assertEquals(guestResponse.getBody().getPhone(), guestBuilder.novoGuestResponse().getPhone());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getStreetName(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getId());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getStreetName(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getStreetName());
+        Assertions.assertEquals(guestResponse.getBody().getGuestAddress().get(0).getStreetName(), guestBuilder.novoGuestFullResponse().getGuestAddress().get(0).getId());
+        Assertions.assertEquals(guestResponse.getBody().getGuestAddress().get(0).getStreetName(), guestBuilder.novoGuestFullResponse().getGuestAddress().get(0).getStreetName());
     }
 
     @Test
@@ -64,8 +65,6 @@ public class GuestControllerTests {
         Assertions.assertEquals(guestResponse.getBody().getDateOfBirth(),guestBuilder.novoGuestResponse().getDateOfBirth());
         Assertions.assertEquals(guestResponse.getBody().getEmail(), guestBuilder.novoGuestResponse().getEmail());
         Assertions.assertEquals(guestResponse.getBody().getPhone(), guestBuilder.novoGuestResponse().getPhone());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getId(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getId());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getStreetName(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getStreetName());
     }
 
     @Test
@@ -83,8 +82,5 @@ public class GuestControllerTests {
         Assertions.assertEquals(guestResponse.getBody().getDateOfBirth(),guestBuilder.novoGuestResponse().getDateOfBirth());
         Assertions.assertEquals(guestResponse.getBody().getEmail(), guestBuilder.novoGuestResponse().getEmail());
         Assertions.assertEquals(guestResponse.getBody().getPhone(), guestBuilder.novoGuestResponse().getPhone());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getId(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getId());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddressEntities().get(0).getStreetName(), guestBuilder.novoGuestResponse().getGuestAddressEntities().get(0).getStreetName());
-
     }
 }

@@ -53,7 +53,4 @@ public class EmployeeRequest {
     @NotBlank(message = "O telefone não pode estar vazio")
     private String socialSecurityNumber;
 
-    @Schema(description = "Endereço")
-    @NotNull(message = "O endereço não pode ser nulo")
-    private List<AddressRequest> employeeAddress;
 }

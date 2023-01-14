@@ -1,5 +1,6 @@
 package com.company.hotelaria.hotel.core.mapper;
 
+import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
 import com.company.hotelaria.hotel.core.dto.employee.EmployeeRequest;
 import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.entities.Employee;
@@ -14,5 +15,6 @@ public interface EmployeeMapper {
 
     Employee requestToEntity(EmployeeRequest request);
 
-    EmployeeResponse entityToResponse(Employee session);
+    EmployeeFullResponse entityToResponseFull(Employee request);
+    EmployeeResponse entityToResponse(Employee request);
 }

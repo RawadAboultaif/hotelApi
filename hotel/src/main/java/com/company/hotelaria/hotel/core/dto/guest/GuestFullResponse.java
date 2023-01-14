@@ -1,6 +1,6 @@
 package com.company.hotelaria.hotel.core.dto.guest;
 
-
+import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
 import com.company.hotelaria.hotel.core.entities.Address;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class GuestResponse {
+public class GuestFullResponse {
 
     private Long id;
     private String name;
@@ -21,4 +21,6 @@ public class GuestResponse {
     private LocalDate dateOfBirth;
     private String email;
     private String phone;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<AddressResponse> guestAddress;
 }

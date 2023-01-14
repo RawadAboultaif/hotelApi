@@ -1,5 +1,7 @@
 package com.company.hotelaria.hotel.service;
 
+import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
+import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.entities.Address;
@@ -32,8 +34,6 @@ public class GuestService {
 
     private AddressRepository addressRepository;
 
-    private AddressMapper addressMapper;
-
     private EmployeeRepository employeeRepository;
 
 
@@ -43,17 +43,16 @@ public class GuestService {
     }
 
 
-    public GuestResponse findBySocialSecurityNumber(String socialSecurityNumber) {
+    public GuestFullResponse findBySocialSecurityNumber(String socialSecurityNumber) {
         log.info("findBySocialSecurityNumber", socialSecurityNumber);
         Guest guest = this.guestRepository.findBySocialSecurityNumber(socialSecurityNumber)
                 .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        GuestResponse guestResponse = this.guestMapper.entityToResponse(guest);
-        List<Address> guestAddressEntities = this.addressRepository.findAllByGuestId(guest.getId());
-        guestResponse.setGuestAddressEntities(guestAddressEntities);
+        GuestFullResponse guestResponse = this.guestMapper.entityToResponseFull(guest);
+        List<AddressResponse> guestAddressEntities = this.addressRepository.findAllByGuestId(guest.getId());
+        guestResponse.setGuestAddress(guestAddressEntities);
         return guestResponse;
     }
 
-    @Transactional
     public GuestResponse save(@Valid GuestRequest request){
 
         log.info("save request = {}", request);
@@ -66,14 +65,6 @@ public class GuestService {
         });
         Guest guestResult = this.guestRepository.save(guest);
         GuestResponse guestResponse = this.guestMapper.entityToResponse(guestResult);
-        List<Address> addressList = new ArrayList<>();
-        for(int i = 0; i < request.getGuestAddress().size(); i++) {
-            Address address = this.addressMapper.requestToEntity(request.getGuestAddress().get(i));
-            Address addressResult = this.addressRepository.save(address);
-            addressResult.updateGuest(guestResult);
-           addressList.add(addressResult);
-        }
-        guestResponse.setGuestAddressEntities(addressList);
         return guestResponse;
     }
 
@@ -81,7 +72,6 @@ public class GuestService {
     public GuestResponse update(@Valid GuestRequest request, Long id){
         log.info(" update request = {}", request);
         Guest guest = this.guestRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        List<Address> guestAddressEntities = this.addressRepository.findAllByGuestId(guest.getId());
         if(!request.getSocialSecurityNumber().equalsIgnoreCase(guest.getSocialSecurityNumber())) {
             this.guestRepository.findBySocialSecurityNumber(request.getSocialSecurityNumber()).ifPresent(p -> {
                 throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
@@ -93,25 +83,7 @@ public class GuestService {
                     request.getDateOfBirth(),
                     request.getSocialSecurityNumber(),
                     request.getPhone());
-        for(int i = 0; i < request.getGuestAddress().size(); i++) {
-            if(i < guestAddressEntities.size()) {
-            guestAddressEntities.get(i).updateAddress(
-                    request.getGuestAddress().get(i).getStreetName(),
-                    request.getGuestAddress().get(i).getNumber(),
-                    request.getGuestAddress().get(i).getComplement(),
-                    request.getGuestAddress().get(i).getCity(),
-                    request.getGuestAddress().get(i).getState(),
-                    request.getGuestAddress().get(i).getZipcode(),
-                    request.getGuestAddress().get(i).getCountry());
-        } else {
-                Address address = this.addressMapper.requestToEntity(request.getGuestAddress().get(i));
-                Address addressResult = this.addressRepository.save(address);
-                addressResult.updateGuest(guest);
-                guestAddressEntities.add(addressResult);
-            }
-        }
         GuestResponse guestResponse = this.guestMapper.entityToResponse(guest);
-        guestResponse.setGuestAddressEntities(guestAddressEntities);
         return guestResponse;
     }
 

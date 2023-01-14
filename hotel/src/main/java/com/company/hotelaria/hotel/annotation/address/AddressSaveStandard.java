@@ -1,7 +1,6 @@
-package com.company.hotelaria.hotel.annotation.guest;
+package com.company.hotelaria.hotel.annotation.address;
 
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,11 +17,11 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Retorna o cliente buscado pelo cpf",
-                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = GuestFullResponse.class))),
-        @ApiResponse(responseCode = "404", description = "CPF não cadastrado",
+        @ApiResponse(responseCode = "201", description = "Endereço criado",
+                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = AddressResponse.class))),
+        @ApiResponse(responseCode = "400", description = "Id não encontrado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })
-@Operation(summary = ConstantsGuest.GUEST_FIND_BY_SOCIALSECURITYNUMBER_SUMMARY, description = ConstantsGuest.GUEST_FIND_BY_SOCIALSECURITYNUMBER_DESCRIPTION)
-public @interface FindGuestbySocialSecurityNumberStandard {
+@Operation(summary = ConstantsAddress.ADDRESS_SAVE_SUMMARY, description = ConstantsAddress.ADDRESS_SAVE_DESCRIPTION)
+public @interface AddressSaveStandard {
 }

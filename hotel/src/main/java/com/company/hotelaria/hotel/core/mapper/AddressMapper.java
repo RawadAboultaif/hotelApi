@@ -1,7 +1,10 @@
 package com.company.hotelaria.hotel.core.mapper;
 
 import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
+import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
+import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.entities.Guest;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -11,7 +14,9 @@ public interface AddressMapper {
 
     Address requestToEntity(AddressRequest request);
 
-    List<Address> listEntityToListResponse(List<Address> guest);
+    AddressResponse entityToResponse(Address request);
+
+    List<AddressResponse> listEntityToListResponse(List<Address> request);
 
 
 }

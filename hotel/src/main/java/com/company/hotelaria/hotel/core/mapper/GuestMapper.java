@@ -1,5 +1,6 @@
 package com.company.hotelaria.hotel.core.mapper;
 
+import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
@@ -14,5 +15,7 @@ public interface GuestMapper {
 
     Guest requestToEntity(GuestRequest request);
 
-    GuestResponse entityToResponse(Guest session);
+    GuestFullResponse entityToResponseFull(Guest request);
+
+    GuestResponse entityToResponse(Guest request);
 }

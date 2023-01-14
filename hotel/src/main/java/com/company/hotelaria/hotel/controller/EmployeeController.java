@@ -2,6 +2,7 @@ package com.company.hotelaria.hotel.controller;
 
 import com.company.hotelaria.hotel.annotation.employee.*;
 import com.company.hotelaria.hotel.annotation.guest.*;
+import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
 import com.company.hotelaria.hotel.core.dto.employee.EmployeeRequest;
 import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
@@ -29,7 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/{socialSecurityNumber}")
     @FindEmployeebySocialSecurityNumberStandard
-    public ResponseEntity<EmployeeResponse> findBySocialSecurityNumber(@PathVariable("socialSecurityNumber") String socialSecurityNumber) {
+    public ResponseEntity<EmployeeFullResponse> findBySocialSecurityNumber(@PathVariable("socialSecurityNumber") String socialSecurityNumber) {
         return ResponseEntity.ok(this.employeeService.findBySocialSecurityNumber(socialSecurityNumber));
     }
 

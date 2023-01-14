@@ -43,9 +43,9 @@ public class Guest {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "guest",  cascade = CascadeType.ALL)
     private Set<Address> address;
 
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "guest",  cascade = CascadeType.ALL)
-//    private Set<Payment> payments;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "guest",  cascade = CascadeType.ALL)
+    private Set<Payment> payment;
 
 
     public void updateGuest(String name, String socialSecurityNumber, LocalDate dateOfBirth,  String email, String phone) {
