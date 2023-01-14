@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/payment")
-@Tag(name = "Payment ")
+@Tag(name = "Payment")
 public class PaymentController {
 
     private PaymentService paymentService;
@@ -29,9 +29,9 @@ public class PaymentController {
     public ResponseEntity<PaymentResponse> find(@PathVariable("id")Long id)
     { return ResponseEntity.ok(this.paymentService.findById(id)); }
 
-    @PostMapping("/idGuest/{id}")
+    @PostMapping("/idGuest/{idGuest}")
     @PaymentSaveStandard
-    public ResponseEntity<PaymentResponse> saveAdressGuest(@RequestBody PaymentRequest request, @PathVariable("id") Long id) {
+    public ResponseEntity<PaymentResponse> save(@RequestBody PaymentRequest request, @PathVariable("idGuest") Long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.save(request, id));
     }
 

@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 public enum Message {
 
     SECURITY_NUMBER_IS_PRESENT("O Cpf ja esta cadastrado=", HttpStatus.BAD_REQUEST),
-    ID_DO_NOT_EXIST("O id nao existe", HttpStatus.NOT_FOUND);
+    ID_DO_NOT_EXIST("O id nao existe", HttpStatus.NOT_FOUND),
+
+    UNIT_NAME_DO_NOT_EXIST("O número do quarto não existe", HttpStatus.NOT_FOUND);
+    ;
 
     private String value;
     private String description;

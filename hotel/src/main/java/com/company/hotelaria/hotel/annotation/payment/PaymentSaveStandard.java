@@ -22,6 +22,6 @@ import java.lang.annotation.Target;
         @ApiResponse(responseCode = "404", description = "Id não encontrado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })
-@Operation(summary = ConstantsPayment.PAYMENT_SAVE_SUMMARY, description = ConstantsPayment.PAYMENT_UPDATE_DESCRIPTION)
+@Operation(summary = ConstantsPayment.PAYMENT_SAVE_SUMMARY, description = ConstantsPayment.PAYMENT_SAVE_DESCRIPTION)
 public @interface PaymentSaveStandard {
 }

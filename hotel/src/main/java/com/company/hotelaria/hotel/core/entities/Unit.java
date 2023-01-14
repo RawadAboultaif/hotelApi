@@ -1,5 +1,6 @@
 package com.company.hotelaria.hotel.core.entities;
 
+import com.company.hotelaria.hotel.enums.UnitEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,5 +30,16 @@ public class Unit {
     private Integer limitGuest;
 
     @Column(name = "status")
-    private Boolean status;
+    @Enumerated(EnumType.STRING)
+    private UnitEnum status;
+
+    public void updateStatus(UnitEnum status) {
+        this.status = status;
+    }
+
+    public void updateUnit(String name, Double price, Integer limitGuest) {
+        this.name = name;
+        this.price = price;
+        this.limitGuest = limitGuest;
+    }
 }

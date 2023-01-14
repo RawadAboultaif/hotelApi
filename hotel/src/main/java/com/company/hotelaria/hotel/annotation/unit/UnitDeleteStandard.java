@@ -1,4 +1,4 @@
-package com.company.hotelaria.hotel.annotation.address;
+package com.company.hotelaria.hotel.annotation.unit;
 
 import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
@@ -17,11 +17,11 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Retonar o endereço buscado",
+        @ApiResponse(responseCode = "204", description = "Quarto Deletado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = AddressResponse.class))),
-        @ApiResponse(responseCode = "404", description = "Endereço não cadastrado",
+        @ApiResponse(responseCode = "404", description = "Quarto não encontrado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })
-@Operation(summary = ConstantsAddress.FIND_ADDRESS_SUMMARY, description = ConstantsAddress.FIND_ADDRESS_DESCRIPTION)
-public @interface FindAddressStandard {
+@Operation(summary = ConstantsUnit.UNIT_DELETE_SUMMARY, description = ConstantsUnit.UNIT_DELETE_DESCRIPTION)
+public @interface UnitDeleteStandard {
 }

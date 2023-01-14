@@ -26,15 +26,15 @@ public class AddressController {
     public ResponseEntity<AddressResponse> find(@PathVariable("id")Long id)
     { return ResponseEntity.ok(this.addressService.findById(id)); }
 
-    @PostMapping("/idGuest/{id}")
+    @PostMapping("/idGuest/{idGuest}")
     @AddressSaveStandard
-    public ResponseEntity<AddressResponse> saveAdressGuest(@RequestBody AddressRequest request, @PathVariable("id") Long id) {
+    public ResponseEntity<AddressResponse> saveAdressGuest(@RequestBody AddressRequest request, @PathVariable("idGuest") Long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddressGuest(request, id));
     }
 
-    @PostMapping("/idEmployee/{id}")
+    @PostMapping("/idEmployee/{idEmployee}")
     @AddressSaveStandard
-    public ResponseEntity<AddressResponse> saveAdressEmployee(@RequestBody AddressRequest request, @PathVariable("id") Long id) {
+    public ResponseEntity<AddressResponse> saveAdressEmployee(@RequestBody AddressRequest request, @PathVariable("idEmployee") Long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddressEmployee(request, id));
     }
 
