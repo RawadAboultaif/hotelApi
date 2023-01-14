@@ -30,4 +30,13 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_guest", referencedColumnName = "id")
     private Guest guest;
+
+    public void updateGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public void updatePayment(String method, String card) {
+        this.method = method;
+        this.card = card;
+    }
 }

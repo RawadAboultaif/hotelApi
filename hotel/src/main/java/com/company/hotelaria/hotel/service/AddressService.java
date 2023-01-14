@@ -36,9 +36,11 @@ public class AddressService {
     private EmployeeRepository employeeRepository;
 
 
-    public List<AddressResponse> findAll(){
-        log.info("findAll");
-        return this.addressMapper.listEntityToListResponse(this.addressRepository.findAll());
+    public AddressResponse findById(Long id){
+        log.info("findById");
+        return this.addressMapper.entityToResponse(this.addressRepository.findById(id)
+                .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException
+        ));
     }
 
     @Transactional

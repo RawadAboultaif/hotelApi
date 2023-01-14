@@ -1,7 +1,6 @@
-package com.company.hotelaria.hotel.annotation.address;
+package com.company.hotelaria.hotel.annotation.payment;
 
 import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,11 +16,9 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Endereço criado",
+        @ApiResponse(responseCode = "200", description = "Retorna o cartão buscado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = AddressResponse.class))),
-        @ApiResponse(responseCode = "404", description = "Id não encontrado",
-                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })
-@Operation(summary = ConstantsAddress.ADDRESS_SAVE_SUMMARY, description = ConstantsAddress.ADDRESS_SAVE_DESCRIPTION)
-public @interface AddressSaveStandard {
+@Operation(summary = ConstantsPayment.FIND_ALL_PAYMENT_SUMMARY, description = ConstantsPayment.FIND_ALL_PAYMENT_DESCRIPTION)
+public @interface FindPaymentStandard {
 }

@@ -1,6 +1,7 @@
-package com.company.hotelaria.hotel.annotation.address;
+package com.company.hotelaria.hotel.annotation.payment;
 
 import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
+import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,9 +17,11 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Retorna uma lista de endereços",
+        @ApiResponse(responseCode = "204", description = "Cartão Deletado",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = AddressResponse.class))),
+        @ApiResponse(responseCode = "404", description = "Cartão não encontrado",
+                content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,schema = @Schema(implementation = BusinessException.BusinessExceptionBody.class))),
         @ApiResponse(responseCode = "500", description = "Sistema indisponivel",content=@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) })
-@Operation(summary = ConstantsAddress.LIST_ALL_ADDRESS_SUMMARY, description = ConstantsAddress.LIST_ALL_ADDRESS_SUMMARY_DESCRIPTION)
-public @interface ListAllAddressStandard {
+@Operation(summary = ConstantsPayment.PAYMENT_DELETE_SUMMARY, description = ConstantsPayment.PAYMENT_DELETE_DESCRIPTION)
+public @interface PaymentDeleteStandard {
 }
