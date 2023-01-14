@@ -1,0 +1,25 @@
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    path: /swagger
+    operationsSorter: method
+
+server:
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: api-hotel
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show_sql: false
+    defer-datasource-initialization: true
+    database: postgresql
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Hotelaria
+    username: postgres
+    password: tn1923ra
+    driver-class-name: org.postgresql.Driver
