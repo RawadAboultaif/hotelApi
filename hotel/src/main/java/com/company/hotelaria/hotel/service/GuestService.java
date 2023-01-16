@@ -4,6 +4,7 @@ import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.entities.Address;
 import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.mapper.AddressMapper;
@@ -12,6 +13,7 @@ import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.AddressRepository;
 import com.company.hotelaria.hotel.repository.EmployeeRepository;
 import com.company.hotelaria.hotel.repository.GuestRepository;
+import com.company.hotelaria.hotel.repository.PaymentsRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class GuestService {
 
     private EmployeeRepository employeeRepository;
 
+    private PaymentsRepository paymentsRepository;
+
 
     public List<GuestResponse> findAll(){
         log.info("findAll");
@@ -48,8 +52,10 @@ public class GuestService {
         Guest guest = this.guestRepository.findBySocialSecurityNumber(socialSecurityNumber)
                 .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
         GuestFullResponse guestResponse = this.guestMapper.entityToResponseFull(guest);
-        List<AddressResponse> guestAddressEntities = this.addressRepository.findAllByGuestId(guest.getId());
-        guestResponse.setGuestAddress(guestAddressEntities);
+        List<AddressResponse> guestAddressResponse = this.addressRepository.findAllByGuestId(guest.getId());
+        guestResponse.setGuestAddress(guestAddressResponse);
+        List<PaymentResponse> guestPaymentResponse = this.paymentsRepository.findAllByGuestId(guest.getId());
+        guestResponse.setGuestPayment(guestPaymentResponse);
         return guestResponse;
     }
 

@@ -49,15 +49,15 @@ public class UnitController {
         return ResponseEntity.status(HttpStatus.OK).body(unitService.update(request, id));
     }
 
-    @PutMapping("/checkout/{id}")
+    @PutMapping("/checkout/{unitName}")
     @UnitUpdateStatusStandard
-    public ResponseEntity<UnitResponse> updateCheckOut(@PathVariable("id") Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(unitService.updateCheckOut(id));
+    public ResponseEntity<UnitResponse> updateCheckOut(@PathVariable("unitName") String name){
+        return ResponseEntity.status(HttpStatus.OK).body(unitService.updateCheckOut(name));
     }
 
-    @PutMapping("/checkin/{id}")
+    @PutMapping("/checkin/{unitName}")
     @UnitUpdateStatusStandard
-    public ResponseEntity<UnitResponse> updateCheckIn(@PathVariable("id") Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(unitService.updateCheckIn(id));
+    public ResponseEntity<UnitResponse> updateCheckIn(@PathVariable("unitName") String name){
+        return ResponseEntity.status(HttpStatus.OK).body(unitService.updateCheckIn(name));
     }
 }

@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 public enum UnitEnum {
 
     EMPTY("E"),
-    FULL("F");
+    FULL("F"),
+    E("EMPTY"),
+    F("FULL");
 
     private final String status;
 

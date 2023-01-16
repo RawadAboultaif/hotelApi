@@ -3,7 +3,6 @@ package com.company.hotelaria.hotel.core.dto.payment;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Builder

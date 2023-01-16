@@ -46,8 +46,8 @@ public class PaymentService {
         Guest guestResult = this.guestRepository.findById(id)
                 .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
         Payment payment = this.paymentMapper.requestToEntity(request);
+        payment.updateGuest(guestResult);
         Payment paymentResult = this.paymentsRepository.save(payment);
-        paymentResult.updateGuest(guestResult);
         PaymentResponse paymentResponse = this.paymentMapper.entityToResponse(paymentResult);
 
         return paymentResponse;
@@ -66,7 +66,7 @@ public class PaymentService {
 
     public void delete(Long id) {
         Payment payment = this.paymentsRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        this.guestRepository.deleteById(payment.getId());
+        this.paymentsRepository.deleteById(payment.getId());
         log.info("method = delete number = {}",id);
     }
 }

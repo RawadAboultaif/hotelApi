@@ -39,10 +39,10 @@ public class UnitService {
 
         log.info("save request = {}", request);
         Unit unit = this.unitMapper.requestToEntity(request);
-        this.unitRepository.findByName(request.getName()).ifPresent(p -> {
-            throw Message.UNIT_NAME_DO_NOT_EXIST.asBusinessException();
-        });
         unit.setStatus(UnitEnum.EMPTY);
+        this.unitRepository.findByName(unit.getName()).ifPresent(p -> {
+            throw Message.UNIT_NAME_EXIST.asBusinessException();
+        });
         Unit unitResult = this.unitRepository.save(unit);
         UnitResponse unitResponse = this.unitMapper.entityToResponse(unitResult);
         return unitResponse;
@@ -66,19 +66,19 @@ public class UnitService {
     }
 
     @Transactional
-    public UnitResponse updateCheckOut(Long id) {
-        log.info(" checkout request = {}", id);
-        Unit unit = this.unitRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        unit.updateStatus(UnitEnum.FULL);
+    public UnitResponse updateCheckOut(String name) {
+        log.info(" checkout request = {}", name);
+        Unit unit = this.unitRepository.findByName(name).orElseThrow(Message.UNIT_NAME_DO_NOT_EXIST::asBusinessException);
+        unit.updateStatus(UnitEnum.EMPTY);
         UnitResponse unitResponse = this.unitMapper.entityToResponse(unit);
         return unitResponse;
     }
 
     @Transactional
-    public UnitResponse updateCheckIn(Long id) {
-        log.info(" checkout request = {}", id);
-        Unit unit = this.unitRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        unit.updateStatus(UnitEnum.EMPTY);
+    public UnitResponse updateCheckIn(String name) {
+        log.info(" checkout request = {}", name);
+        Unit unit = this.unitRepository.findByName(name).orElseThrow(Message.UNIT_NAME_DO_NOT_EXIST::asBusinessException);
+        unit.updateStatus(UnitEnum.FULL);
         UnitResponse unitResponse = this.unitMapper.entityToResponse(unit);
         return unitResponse;
     }

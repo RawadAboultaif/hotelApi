@@ -42,7 +42,7 @@ public class EmployeeService {
     public EmployeeFullResponse findBySocialSecurityNumber(String socialSecurityNumber) {
         log.info("findBySocialSecurityNumber", socialSecurityNumber);
         Employee employee = this.employeeRepository.findBySocialSecurityNumber(socialSecurityNumber)
-                .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
+                .orElseThrow(Message.SECURITY_NUMBER_IS_NOT_PRESENT::asBusinessException);
         EmployeeFullResponse employeeResponse = this.employeeMapper.entityToResponseFull(employee);
         List<AddressResponse> employeeAddressEntities = this.addressRepository.findAllByEmployeeId(employee.getId());
         employeeResponse.setEmployeeAddress(employeeAddressEntities);

@@ -90,7 +90,7 @@ public class AddressService {
 
     public void delete(Long id) {
         Address address = this.addressRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
-        this.guestRepository.deleteById(address.getId());
+        this.addressRepository.deleteById(address.getId());
         log.info("method = delete number = {}",id);
     }
 }

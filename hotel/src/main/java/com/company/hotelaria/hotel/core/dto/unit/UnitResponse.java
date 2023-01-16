@@ -4,12 +4,12 @@ import com.company.hotelaria.hotel.enums.UnitEnum;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class UnitResponse {
 
+    private Long id;
     private String name;
     private Double price;
     private Integer limitGuest;

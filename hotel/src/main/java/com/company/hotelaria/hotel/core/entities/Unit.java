@@ -1,9 +1,11 @@
 package com.company.hotelaria.hotel.core.entities;
 
 import com.company.hotelaria.hotel.enums.UnitEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +34,10 @@ public class Unit {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private UnitEnum status;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit", cascade = CascadeType.ALL)
+    private Set<Rent> Rent;
 
     public void updateStatus(UnitEnum status) {
         this.status = status;

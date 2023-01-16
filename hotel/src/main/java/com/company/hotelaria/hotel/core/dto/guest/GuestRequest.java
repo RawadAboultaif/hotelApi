@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class GuestRequest {
 
     @Schema(description = "Data de nascimento", example = "1991-19-1991")
     @NotNull(message = "A data de nascimento não pode ser nulo")
+    @Past
     private LocalDate dateOfBirth;
 
     @Schema(description = "Email", example = "email@emailtest.com")
