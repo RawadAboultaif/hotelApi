@@ -48,16 +48,6 @@ public class GuestBuilder {
         return listGuests;
     }
 
-    public static List<GuestFullResponse> novaListaDeGuestFullResponse() {
-        GuestFullResponse guest1 = criarGuestFullResponse(1L);
-        GuestFullResponse guest2 = criarGuestFullResponse(2L);
-        List<GuestFullResponse> listGuests = new ArrayList<>();
-        listGuests.add(guest1);
-        listGuests.add(guest2);
-
-        return listGuests;
-    }
-
     public static List<Guest> novaListaGuest() {
         Guest guest1 = criarGuest(1L);
         Guest guest2 = criarGuest(2L);

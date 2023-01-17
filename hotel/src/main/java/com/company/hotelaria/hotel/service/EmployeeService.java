@@ -72,6 +72,9 @@ public class EmployeeService {
             this.employeeRepository.findBySocialSecurityNumber(request.getSocialSecurityNumber()).ifPresent(p -> {
                 throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
             });
+            this.guestRepository.findBySocialSecurityNumber(request.getSocialSecurityNumber()).ifPresent(p -> {
+                throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
+            });
         }
             employee.updateEmployee(
                     request.getName(),

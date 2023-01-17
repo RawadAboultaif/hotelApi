@@ -1,0 +1,158 @@
+
+-- Database: Hotelaria
+
+-- DROP DATABASE IF EXISTS "Hotelaria";
+
+CREATE DATABASE "Hotelaria"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+BEGIN;
+
+
+CREATE TABLE IF NOT EXISTS public.address
+(
+    id serial NOT NULL,
+    street_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    "number" character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    complement character varying(20) COLLATE pg_catalog."default",
+    city character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    state character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    zipcode character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    id_employee integer,
+    id_guest integer,
+    CONSTRAINT address_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.employee
+(
+    id serial NOT NULL,
+    name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    role character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    remuneration double precision NOT NULL,
+    workschedule character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    social_security_number character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT employee_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.guest
+(
+    id serial NOT NULL,
+    name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    social_security_number character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    date_of_birth date NOT NULL,
+    email character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT guest_pkey PRIMARY KEY (id),
+    CONSTRAINT social_security_number_unique UNIQUE (social_security_number)
+);
+
+CREATE TABLE IF NOT EXISTS public.improvement
+(
+    id serial NOT NULL,
+    name character varying(80) COLLATE pg_catalog."default" NOT NULL,
+    location "char" NOT NULL,
+    CONSTRAINT improvement_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.improvement_unit
+(
+    improvement_id serial NOT NULL,
+    unit_id serial NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.payment
+(
+    id serial NOT NULL,
+    method character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    card character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    id_guest integer NOT NULL,
+    CONSTRAINT payment_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.rent
+(
+    id serial NOT NULL,
+    check_in date NOT NULL,
+    check_out date NOT NULL,
+    total_price double precision NOT NULL,
+    id_guest integer NOT NULL,
+    id_unit integer NOT NULL,
+    CONSTRAINT rent_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.unit
+(
+    id serial NOT NULL,
+    name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    price double precision NOT NULL,
+    limit_guest integer NOT NULL,
+    status "char" NOT NULL,
+    CONSTRAINT unit_pkey PRIMARY KEY (id)
+);
+
+ALTER TABLE IF EXISTS public.address
+    ADD FOREIGN KEY (id_guest)
+    REFERENCES public.guest (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.address
+    ADD FOREIGN KEY (id_employee)
+    REFERENCES public.employee (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.improvement_unit
+    ADD FOREIGN KEY (improvement_id)
+    REFERENCES public.improvement (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.improvement_unit
+    ADD FOREIGN KEY (unit_id)
+    REFERENCES public.unit (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.payment
+    ADD FOREIGN KEY (id_guest)
+    REFERENCES public.guest (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.rent
+    ADD FOREIGN KEY (id_guest)
+    REFERENCES public.guest (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.rent
+    ADD FOREIGN KEY (id_unit)
+    REFERENCES public.unit (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+END;

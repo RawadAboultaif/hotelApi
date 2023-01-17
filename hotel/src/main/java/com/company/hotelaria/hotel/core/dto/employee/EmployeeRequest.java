@@ -3,19 +3,18 @@ package com.company.hotelaria.hotel.core.dto.employee;
 
 import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@Builder
 public class EmployeeRequest {
 
 

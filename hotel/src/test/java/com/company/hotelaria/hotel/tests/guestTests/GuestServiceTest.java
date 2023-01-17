@@ -1,6 +1,7 @@
 package com.company.hotelaria.hotel.tests.guestTests;
 
 import com.company.hotelaria.hotel.builders.AddressBuilder;
+import com.company.hotelaria.hotel.builders.EmployeeBuilder;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.PaymentBuilder;
 import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
@@ -52,7 +53,7 @@ public class GuestServiceTest {
     private EmployeeRepository employeeRepository;
 
     @Test
-    public void testDeveListarTodosOsClientes() {
+    public void testDeveListarTodosOsGuest() {
         when(guestRepository.findAll()).thenReturn(GuestBuilder.novaListaGuest());
         when(guestMapper.listEntityToListResponse(any())).thenReturn(GuestBuilder.novaListaDeGuestResponse());
 
@@ -62,7 +63,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveBuscarClientePorCpfComSucesso() {
+    public void testDeveBuscarGuestPorCpfComSucesso() {
 
         when(guestRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(guestMapper.entityToResponseFull(any())).thenReturn(GuestBuilder.novoGuestFullResponse());
@@ -77,7 +78,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testeDeveCadastrarClienteComSucesso() {
+    public void testeDeveCadastrarGuestComSucesso() {
 
         when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
         when(guestRepository.save(any())).thenReturn(GuestBuilder.novoGuest());
@@ -96,18 +97,28 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarClienteComCpfJaCadastrado() {
+    public void testDeveRetornarErroAoCadastrarGuestComCpfJaCadastradoExecption1() {
 
         when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
         when(guestRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
-//        when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of());
+
+
+        assertThrows(BusinessException.class, () -> guestService.save(GuestBuilder.novoGuestRequest()));
+    }
+
+    @Test
+    public void testDeveRetornarErroAoCadastrarGuestComCpfJaCadastradoExecption2() {
+
+        when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
+        when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
+
 
         assertThrows(BusinessException.class, () -> guestService.save(GuestBuilder.novoGuestRequest()));
     }
 
 
     @Test
-    public void testDeveAtualizarClienteComSucesso() {
+    public void testDeveAtualizarGuestComSucesso() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(guestMapper.entityToResponse(any())).thenReturn(GuestBuilder.novoGuestResponse());
@@ -119,7 +130,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testeDeveRetornarErroAoAtualizarClienteParaUmCpfJaCadastrado() {
+    public void testeDeveRetornarErroAoAtualizarGuestParaUmCpfJaCadastradoException1() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuestComSocialSecurityNumberDiferente()));
 
@@ -130,7 +141,18 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveDeletarClienteComSucesso() {
+    public void testeDeveRetornarErroAoAtualizarGuestParaUmCpfJaCadastradoException2() {
+
+        when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuestComSocialSecurityNumberDiferente()));
+
+        when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
+
+        assertThrows(BusinessException.class, () -> guestService.update(GuestBuilder.novoGuestRequest(), GuestBuilder.novoGuestResponse().getId()));
+
+    }
+
+    @Test
+    public void testDeveDeletarGuestComSucesso() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         doNothing().when(guestRepository).deleteById(any());
@@ -141,7 +163,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoDeletarClienteComIdInexistente() {
+    public void testDeveRetornarErroAoDeletarGuestComIdInexistente() {
 
         when(guestRepository.findById(any())).thenThrow(Message.ID_DO_NOT_EXIST.asBusinessException());
 
