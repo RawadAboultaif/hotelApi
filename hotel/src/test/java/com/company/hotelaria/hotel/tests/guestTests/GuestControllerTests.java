@@ -33,8 +33,8 @@ public class GuestControllerTests {
         Assertions.assertEquals(guestResponse.getBody().getDateOfBirth(),guestBuilder.novoGuestResponse().getDateOfBirth());
         Assertions.assertEquals(guestResponse.getBody().getEmail(), guestBuilder.novoGuestResponse().getEmail());
         Assertions.assertEquals(guestResponse.getBody().getPhone(), guestBuilder.novoGuestResponse().getPhone());
-        Assertions.assertEquals(guestResponse.getBody().getGuestAddress().get(0).getStreetName(), guestBuilder.novoGuestFullResponse().getGuestAddress().get(0).getId());
         Assertions.assertEquals(guestResponse.getBody().getGuestAddress().get(0).getStreetName(), guestBuilder.novoGuestFullResponse().getGuestAddress().get(0).getStreetName());
+        Assertions.assertEquals(guestResponse.getBody().getGuestAddress().get(0).getCity(), "Belo horizonte");
     }
 
     @Test

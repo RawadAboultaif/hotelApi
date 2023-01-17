@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@ToString
 public class GuestResponse {
 
     private Long id;

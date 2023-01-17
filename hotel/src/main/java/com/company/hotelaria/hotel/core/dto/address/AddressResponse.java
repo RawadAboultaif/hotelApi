@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Builder
+@ToString
 public class AddressResponse {
 
     private Long id;
