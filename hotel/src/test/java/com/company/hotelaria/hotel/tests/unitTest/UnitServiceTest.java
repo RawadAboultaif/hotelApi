@@ -1,15 +1,12 @@
 package com.company.hotelaria.hotel.tests.unitTest;
 
-import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.UnitBuilder;
-import com.company.hotelaria.hotel.core.dto.unit.UnitRequest;
 import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
-import com.company.hotelaria.hotel.core.entities.Unit;
 import com.company.hotelaria.hotel.core.mapper.UnitMapper;
+import com.company.hotelaria.hotel.enums.UnitEnum;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import com.company.hotelaria.hotel.repository.UnitRepository;
 import com.company.hotelaria.hotel.service.UnitService;
-import net.bytebuddy.pool.TypePool;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,11 +16,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UnitTestService {
+public class UnitServiceTest {
 
     @InjectMocks
     private UnitService unitService;
@@ -65,6 +62,16 @@ public class UnitTestService {
     }
 
     @Test
+    public void testDeveRetornarErroAoCadastrarUnitComNomeExistente() {
+
+        when(unitMapper.requestToEntity(any())).thenReturn(UnitBuilder.novoUnit());
+        when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
+
+
+        assertThrows(BusinessException.class, () -> unitService.save(UnitBuilder.novoUnitRequest()));
+    }
+
+    @Test
     public void testDeveAtualizarUnitComSucesso() {
 
         when(unitRepository.findById(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
@@ -92,5 +99,33 @@ public class UnitTestService {
     @Test
     public void testDeveRealizarUnitCheckOut() {
 
+        when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
+        when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitResponse());
+
+        UnitResponse unitResponse = unitService.updateCheckOut(UnitBuilder.novoUnitRequest().getName());
+
+        assertEquals(unitResponse.getStatus(), UnitEnum.EMPTY);
+    }
+
+    @Test
+    public void testDeveRealizarUnitCheckIn() {
+
+        when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
+        when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitFullResponse());
+
+        UnitResponse unitResponse = unitService.updateCheckIn(UnitBuilder.novoUnitRequest().getName());
+
+        assertEquals(unitResponse.getStatus(), UnitEnum.FULL);
+    }
+
+    @Test
+    public void testeDeletarUnitComSucesso() {
+
+        when(unitRepository.findById(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
+        doNothing().when(unitRepository).deleteById(any());
+
+        unitService.delete(1L);
+
+        verify(unitRepository, times(1)).deleteById(any());
     }
 }

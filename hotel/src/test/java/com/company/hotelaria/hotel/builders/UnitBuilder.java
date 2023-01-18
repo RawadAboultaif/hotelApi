@@ -15,6 +15,18 @@ public class UnitBuilder {
         return criarUnitResponse(1L);
     }
 
+    public static UnitResponse novoUnitFullResponse() {
+        UnitResponse unitResponse = criarUnitResponse(1L);
+        unitResponse.setStatus(UnitEnum.FULL);
+        return unitResponse;
+    }
+
+    public static Unit novoUnitStatusFull() {
+        Unit unit = criarNovoUnit(1L);
+        unit.setStatus(UnitEnum.F);
+        return unit;
+    }
+
     public static UnitRequest novoUnitRequest() {
         return criarUnitRequest();
     }
