@@ -1,7 +1,7 @@
 package com.company.hotelaria.hotel.builders;
 
-import com.company.hotelaria.hotel.core.dto.unit.UnitRequest;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.unit.UnitRequest;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.core.entities.Unit;
 import com.company.hotelaria.hotel.enums.UnitEnum;
 

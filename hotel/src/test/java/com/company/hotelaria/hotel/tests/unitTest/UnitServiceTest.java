@@ -1,7 +1,7 @@
 package com.company.hotelaria.hotel.tests.unitTest;
 
 import com.company.hotelaria.hotel.builders.UnitBuilder;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.core.mapper.UnitMapper;
 import com.company.hotelaria.hotel.enums.UnitEnum;
 import com.company.hotelaria.hotel.exception.BusinessException;
@@ -30,7 +30,7 @@ public class UnitServiceTest {
     private UnitRepository unitRepository;
 
     @Test
-    public void testDeveBuscarUnitPorNome() {
+    public void testMustFindUnitByName() {
 
         when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitResponse());
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
@@ -45,7 +45,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveCadastrarUnitComSucesso() {
+    public void testMustSaveUnit() {
 
         when(unitMapper.requestToEntity(any())).thenReturn(UnitBuilder.novoUnit());
         when(unitRepository.findByName(any())).thenReturn(Optional.empty());
@@ -62,7 +62,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarUnitComNomeExistente() {
+    public void testMustReturnErrorWhenSavingUnitWithNameAlreadyUsed() {
 
         when(unitMapper.requestToEntity(any())).thenReturn(UnitBuilder.novoUnit());
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
@@ -72,7 +72,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveAtualizarUnitComSucesso() {
+    public void testMustUpdate() {
 
         when(unitRepository.findById(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
         when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitResponse());
@@ -87,7 +87,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoAtualizarUnitNameParaUmNomeJaExistente() {
+    public void testMustReturnErrorWhenUpdatingUnitNameToUnitNameAlreadyUsed() {
 
         when(unitRepository.findById(any())).thenReturn(Optional.of(UnitBuilder.novoUnitComUnitNameDiferente()));
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
@@ -97,7 +97,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveRealizarUnitCheckOut() {
+    public void testMustDoUnitCheckout() {
 
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
         when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitResponse());
@@ -108,7 +108,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testDeveRealizarUnitCheckIn() {
+    public void testMustDoUnitCheckIn() {
 
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
         when(unitMapper.entityToResponse(any())).thenReturn(UnitBuilder.novoUnitFullResponse());
@@ -119,7 +119,7 @@ public class UnitServiceTest {
     }
 
     @Test
-    public void testeDeletarUnitComSucesso() {
+    public void testMustDeleteUnit() {
 
         when(unitRepository.findById(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
         doNothing().when(unitRepository).deleteById(any());

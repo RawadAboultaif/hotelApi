@@ -3,15 +3,12 @@ package com.company.hotelaria.hotel.tests.addressTest;
 import com.company.hotelaria.hotel.builders.AddressBuilder;
 import com.company.hotelaria.hotel.builders.EmployeeBuilder;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.entities.Guest;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.core.mapper.AddressMapper;
-import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.AddressRepository;
 import com.company.hotelaria.hotel.repository.EmployeeRepository;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.service.AddressService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,7 +38,7 @@ public class AddressServiceTest {
     private EmployeeRepository employeeRepository;
 
     @Test
-    public void testDeveBuscarEnderecoPorIdComSucesso() {
+    public void testMustFindAddressById() {
 
         when(addressMapper.entityToResponse(any())).thenReturn(AddressBuilder.novoAddressResponse());
         when(addressRepository.findById(any())).thenReturn(Optional.of(AddressBuilder.novoAddress()));
@@ -55,7 +52,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void testDeveCadastrarNovoEnderecoAoGuest() {
+    public void testMustSaveNewAddressToGuest() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(addressMapper.requestToEntity(any())).thenReturn(AddressBuilder.novoAddress());
@@ -71,7 +68,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void testDeveCadastrarNovoEnderecoAoEmployee() {
+    public void testMustSabeNewAddressToEmployee() {
 
         when(employeeRepository.findById(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
         when(addressMapper.requestToEntity(any())).thenReturn(AddressBuilder.novoAddress());
@@ -87,7 +84,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void testeDeveAtualizarEnderecoComSucesso() {
+    public void testMustUpdateAddress() {
 
         when(addressRepository.findById(any())).thenReturn(Optional.of(AddressBuilder.novoAddress()));
         when(addressMapper.entityToResponse(any())).thenReturn(AddressBuilder.novoAddressResponse());
@@ -103,7 +100,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void testDeveDeletarAddressComSucesso() {
+    public void testMustDeleteAddress() {
         when(addressRepository.findById(any())).thenReturn(Optional.of(AddressBuilder.novoAddress()));
         doNothing().when(addressRepository).deleteById(any());
 

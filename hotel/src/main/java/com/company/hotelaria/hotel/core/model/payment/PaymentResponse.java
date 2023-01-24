@@ -1,4 +1,4 @@
-package com.company.hotelaria.hotel.core.dto.payment;
+package com.company.hotelaria.hotel.core.model.payment;
 
 import lombok.*;
 

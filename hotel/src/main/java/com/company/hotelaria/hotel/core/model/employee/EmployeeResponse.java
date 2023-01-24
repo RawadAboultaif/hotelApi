@@ -1,10 +1,6 @@
-package com.company.hotelaria.hotel.core.dto.employee;
+package com.company.hotelaria.hotel.core.model.employee;
 
-import com.company.hotelaria.hotel.core.entities.Address;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @Getter

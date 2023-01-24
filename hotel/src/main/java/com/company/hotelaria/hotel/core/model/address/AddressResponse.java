@@ -1,10 +1,6 @@
-package com.company.hotelaria.hotel.core.dto.address;
+package com.company.hotelaria.hotel.core.model.address;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @Getter

@@ -1,13 +1,11 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestRequest;
+import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
-import com.company.hotelaria.hotel.core.mapper.AddressMapper;
 import com.company.hotelaria.hotel.core.mapper.GuestMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.AddressRepository;
@@ -21,8 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.YEARS;
 
 @AllArgsConstructor
 @Service
@@ -50,7 +50,7 @@ public class GuestService {
     public GuestFullResponse findBySocialSecurityNumber(String socialSecurityNumber) {
         log.info("findBySocialSecurityNumber", socialSecurityNumber);
         Guest guest = this.guestRepository.findBySocialSecurityNumber(socialSecurityNumber)
-                .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
+                .orElseThrow(Message.SECURITY_NUMBER_IS_NOT_PRESENT::asBusinessException);
         GuestFullResponse guestResponse = this.guestMapper.entityToResponseFull(guest);
         List<AddressResponse> guestAddressResponse = this.addressRepository.findAllByGuestId(guest.getId());
         guestResponse.setGuestAddress(guestAddressResponse);
@@ -62,6 +62,10 @@ public class GuestService {
     public GuestResponse save(@Valid GuestRequest request){
 
         log.info("save request = {}", request);
+        long yearBetween = YEARS.between(request.getDateOfBirth(), LocalDate.now());
+        if(yearBetween < 17) {
+            throw Message.AGE_UNDER_EIGHTEEN.asBusinessException();
+        }
         Guest guest = this.guestMapper.requestToEntity(request);
         this.guestRepository.findBySocialSecurityNumber(request.getSocialSecurityNumber()).ifPresent(p -> {
             throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
@@ -78,6 +82,10 @@ public class GuestService {
     public GuestResponse update(@Valid GuestRequest request, Long id){
         log.info(" update request = {}", request);
         Guest guest = this.guestRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
+        long yearBetween = YEARS.between(request.getDateOfBirth(), LocalDate.now());
+        if(yearBetween < 17) {
+            throw Message.AGE_UNDER_EIGHTEEN.asBusinessException();
+        }
         if(!request.getSocialSecurityNumber().equalsIgnoreCase(guest.getSocialSecurityNumber())) {
             this.guestRepository.findBySocialSecurityNumber(request.getSocialSecurityNumber()).ifPresent(p -> {
                 throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
@@ -86,12 +94,12 @@ public class GuestService {
                 throw Message.SECURITY_NUMBER_IS_PRESENT.asBusinessException();
             });
         }
-            guest.updateGuest(
-                    request.getName(),
-                    request.getEmail(),
-                    request.getDateOfBirth(),
-                    request.getSocialSecurityNumber(),
-                    request.getPhone());
+        guest.updateGuest(
+            request.getName(),
+            request.getSocialSecurityNumber(),
+            request.getDateOfBirth(),
+            request.getEmail(),
+            request.getPhone());
         GuestResponse guestResponse = this.guestMapper.entityToResponse(guest);
         return guestResponse;
     }

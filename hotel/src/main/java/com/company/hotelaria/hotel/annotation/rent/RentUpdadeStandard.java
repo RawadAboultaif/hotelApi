@@ -1,7 +1,6 @@
 package com.company.hotelaria.hotel.annotation.rent;
 
-import com.company.hotelaria.hotel.core.dto.rent.RentResponse;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

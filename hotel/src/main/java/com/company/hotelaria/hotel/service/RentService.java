@@ -1,10 +1,7 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.rent.RentRequest;
-import com.company.hotelaria.hotel.core.dto.rent.RentResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.model.rent.RentRequest;
+import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.entities.Rent;
 import com.company.hotelaria.hotel.core.entities.Unit;
@@ -23,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -52,6 +48,9 @@ public class RentService {
     public RentResponse save(@Valid RentRequest request, Long id, String name){
 
         log.info("save request = {}", request);
+        if(request.getCheckIn().compareTo(request.getCheckOut()) > 0) {
+            throw Message.RENT_CHECKIN_GREATER_THAN_CHECKOUT.asBusinessException();
+        }
         Guest guestResult = this.guestRepository.findById(id)
                 .orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
         Unit unitResult = this.unitRepository.findByName(name)

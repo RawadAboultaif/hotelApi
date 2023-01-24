@@ -1,11 +1,10 @@
-package com.company.hotelaria.hotel.core.dto.rent;
+package com.company.hotelaria.hotel.core.model.rent;
 
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @Getter

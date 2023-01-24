@@ -1,6 +1,6 @@
 package com.company.hotelaria.hotel.annotation.address;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

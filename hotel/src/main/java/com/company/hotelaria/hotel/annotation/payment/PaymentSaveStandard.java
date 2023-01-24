@@ -1,7 +1,6 @@
 package com.company.hotelaria.hotel.annotation.payment;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

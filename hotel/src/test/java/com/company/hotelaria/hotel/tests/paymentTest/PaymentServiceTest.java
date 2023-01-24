@@ -2,7 +2,7 @@ package com.company.hotelaria.hotel.tests.paymentTest;
 
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.PaymentBuilder;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.mapper.PaymentMapper;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.repository.PaymentsRepository;
@@ -32,7 +32,7 @@ public class PaymentServiceTest {
     private GuestRepository guestRepository;
 
     @Test
-    public void testBuscarPaymentPorIdComSucesso() {
+    public void testMustFindPaymentById() {
 
         when(paymentMapper.entityToResponse(any())).thenReturn(PaymentBuilder.novoPaymentResponse());
         when(paymentRepository.findById(any())).thenReturn(Optional.of(PaymentBuilder.novoPayment()));
@@ -45,7 +45,7 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void testDeveCadastrarPaymentComSucesso() {
+    public void testMustSavePayment() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(paymentMapper.requestToEntity(any())).thenReturn(PaymentBuilder.novoPayment());
@@ -60,7 +60,7 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void testDeveAtualizarPaymentComSucesso() {
+    public void testMustUpdatePayment() {
 
         when(paymentRepository.findById(any())).thenReturn(Optional.of(PaymentBuilder.novoPayment()));
         when(paymentMapper.entityToResponse(any())).thenReturn(PaymentBuilder.novoPaymentResponse());
@@ -73,7 +73,7 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void testDeveDeletarPaymentComSucesso() {
+    public void testMustDeletePayment() {
 
         when(paymentRepository.findById(any())).thenReturn(Optional.of(PaymentBuilder.novoPayment()));
         doNothing().when(paymentRepository).deleteById(any());

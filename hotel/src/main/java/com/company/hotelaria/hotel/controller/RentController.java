@@ -2,13 +2,9 @@ package com.company.hotelaria.hotel.controller;
 
 import com.company.hotelaria.hotel.annotation.rent.FindRentStandard;
 import com.company.hotelaria.hotel.annotation.rent.RentDeleteStandard;
-import com.company.hotelaria.hotel.annotation.unit.FindUnitStandard;
-import com.company.hotelaria.hotel.annotation.unit.UnitDeleteStandard;
 import com.company.hotelaria.hotel.annotation.unit.UnitSaveStandard;
-import com.company.hotelaria.hotel.core.dto.rent.RentRequest;
-import com.company.hotelaria.hotel.core.dto.rent.RentResponse;
-import com.company.hotelaria.hotel.core.dto.unit.UnitRequest;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.rent.RentRequest;
+import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.service.RentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

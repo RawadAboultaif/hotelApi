@@ -46,12 +46,13 @@ public class Employee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
     private Set<Address> address;
 
-    public void updateEmployee(String name, String role, Double remuneration, String workschedule, String email, String socialSecurityNumber) {
+    public void updateEmployee(String name, String role, Double remuneration, String workschedule, String email,String phone, String socialSecurityNumber) {
         this.name = name;
         this.role = role;
         this.remuneration = remuneration;
         this.workschedule = workschedule;
         this.email = email;
+        this.phone = phone;
         this.socialSecurityNumber = socialSecurityNumber;
     }
 

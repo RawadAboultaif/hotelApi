@@ -3,11 +3,8 @@ package com.company.hotelaria.hotel.tests.employeeTest;
 import com.company.hotelaria.hotel.builders.AddressBuilder;
 import com.company.hotelaria.hotel.builders.EmployeeBuilder;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
-import com.company.hotelaria.hotel.builders.PaymentBuilder;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeFullResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.mapper.EmployeeMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.exception.BusinessException;
@@ -46,7 +43,7 @@ public class EmployeeServiceTest {
     private GuestRepository guestRepository;
 
     @Test
-    public void testDeveListarTodosOsClientes() {
+    public void testMustListAllClients() {
         when(employeeRepository.findAll()).thenReturn(EmployeeBuilder.novaListaEmployee());
         when(employeeMapper.listEntityToListResponse(any())).thenReturn(EmployeeBuilder.novaListaEmployeeResponse());
 
@@ -56,7 +53,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveBuscarEmployeePorCpfComSucesso() {
+    public void testMustFindEmployeeByCpf() {
 
         when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
         when(employeeMapper.entityToResponseFull(any())).thenReturn(EmployeeBuilder.novoEmployeeFullResponse());
@@ -70,7 +67,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testeDeveCadastrarEmployeeComSucesso() {
+    public void testMustSaveEmployee() {
 
         when(employeeMapper.requestToEntity(any())).thenReturn(EmployeeBuilder.novoEmployee());
         when(employeeRepository.save(any())).thenReturn(EmployeeBuilder.novoEmployee());
@@ -88,7 +85,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarEmployeeComCpfJaCadastradoExecption1() {
+    public void testMustReturnErrorSavingEmployeeWithCpfAlreadyUsedExecption1() {
 
         when(employeeMapper.requestToEntity(any())).thenReturn(EmployeeBuilder.novoEmployee());
         when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
@@ -98,7 +95,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarEmployeeComCpfJaCadastradoExecption2() {
+    public void testMustReturnErrorSavingEmployeeWithCpfAlreadyUsedExecption2() {
 
         when(employeeMapper.requestToEntity(any())).thenReturn(EmployeeBuilder.novoEmployee());
         when(guestRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
@@ -108,7 +105,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveAtualizarEmployeeComSucesso() {
+    public void testMustUpdateEmployee() {
 
         when(employeeRepository.findById(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
         when(employeeMapper.entityToResponse(any())).thenReturn(EmployeeBuilder.novoEmployeeResponse());
@@ -120,7 +117,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testeDeveRetornarErroAoAtualizarEmployeeParaUmCpfJaCadastradoException1() {
+    public void testMustReturnErroUpdatingEmployeeToCpfAlreadyUsedException1() {
 
         when(employeeRepository.findById(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployeeComSocialSecurityNumberDiferente()));
 
@@ -131,7 +128,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testeDeveRetornarErroAoAtualizarEmployeeParaUmCpfJaCadastradoException2() {
+    public void testMustReturnErroUpdatingEmployeeToCpfAlreadyUsedException2() {
 
         when(employeeRepository.findById(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployeeComSocialSecurityNumberDiferente()));
 
@@ -142,7 +139,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveDeletarEmployeeComSucesso() {
+    public void testMustDeleteEmloyee() {
 
         when(employeeRepository.findById(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
         doNothing().when(employeeRepository).deleteById(any());
@@ -153,7 +150,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoDeletarEmployeeComIdInexistente() {
+    public void testMustReturnErrorDeleteEmployeeWithIdNonexistent() {
 
         when(employeeRepository.findById(any())).thenThrow(Message.ID_DO_NOT_EXIST.asBusinessException());
 

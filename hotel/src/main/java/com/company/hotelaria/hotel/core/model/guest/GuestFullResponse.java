@@ -1,9 +1,7 @@
-package com.company.hotelaria.hotel.core.dto.guest;
+package com.company.hotelaria.hotel.core.model.guest;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
-import com.company.hotelaria.hotel.service.PaymentService;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 

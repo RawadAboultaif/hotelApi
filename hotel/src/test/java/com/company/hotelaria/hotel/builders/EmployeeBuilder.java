@@ -1,10 +1,9 @@
 package com.company.hotelaria.hotel.builders;
 
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeRequest;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeFullResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeRequest;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.entities.Employee;
-import com.company.hotelaria.hotel.core.entities.Guest;
 
 import java.util.ArrayList;
 import java.util.List;
