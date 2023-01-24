@@ -1,8 +1,6 @@
 package com.company.hotelaria.hotel.annotation.employee;
 
-import com.company.hotelaria.hotel.annotation.guest.ConstantsGuest;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

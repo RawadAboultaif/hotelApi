@@ -1,11 +1,10 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeRequest;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeFullResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeRequest;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.core.entities.Employee;
-import com.company.hotelaria.hotel.core.mapper.AddressMapper;
 import com.company.hotelaria.hotel.core.mapper.EmployeeMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.AddressRepository;
@@ -82,6 +81,7 @@ public class EmployeeService {
                     request.getRemuneration(),
                     request.getWorkschedule(),
                     request.getEmail(),
+                    request.getPhone(),
                     request.getSocialSecurityNumber());
 
         EmployeeResponse employeeResponse = this.employeeMapper.entityToResponse(employee);

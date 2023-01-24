@@ -1,7 +1,6 @@
-package com.company.hotelaria.hotel.core.dto.employee;
+package com.company.hotelaria.hotel.core.model.employee;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 

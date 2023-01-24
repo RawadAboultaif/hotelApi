@@ -1,14 +1,11 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.address.AddressRequest;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.core.entities.Address;
 import com.company.hotelaria.hotel.core.entities.Employee;
 import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.mapper.AddressMapper;
-import com.company.hotelaria.hotel.core.mapper.GuestMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.AddressRepository;
 import com.company.hotelaria.hotel.repository.EmployeeRepository;
@@ -20,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @AllArgsConstructor
 @Service

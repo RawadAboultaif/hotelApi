@@ -2,20 +2,16 @@ package com.company.hotelaria.hotel.controller;
 
 
 import com.company.hotelaria.hotel.annotation.guest.*;
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestRequest;
+import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
 import com.company.hotelaria.hotel.service.GuestService;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import lombok.experimental.FieldNameConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.PreRemove;
-import java.lang.annotation.Target;
 import java.util.List;
 
 @RestController
@@ -26,13 +22,13 @@ public class GuestController {
 
     private GuestService guestService;
 
-    @GetMapping
+    @GetMapping("/list-all-guest")
     @ListAllGuestStandard
     public ResponseEntity<List<GuestResponse>> listAllGuests() { return ResponseEntity.ok(this.guestService.findAll()); }
 
-    @GetMapping("/{socialSecurityNumber}")
+    @GetMapping("/cpf/{cpf}")
     @FindGuestbySocialSecurityNumberStandard
-    public ResponseEntity<GuestFullResponse> findBySocialSecurityNumber(@PathVariable("socialSecurityNumber") String socialSecurityNumber) {
+    public ResponseEntity<GuestFullResponse> findBySocialSecurityNumber(@PathVariable("cpf") String socialSecurityNumber) {
         return ResponseEntity.ok(this.guestService.findBySocialSecurityNumber(socialSecurityNumber));
     }
 
@@ -49,7 +45,7 @@ public class GuestController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @GuestUpdadeStandard
     public ResponseEntity<GuestResponse> update(@RequestBody GuestRequest request, @PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(guestService.update(request, id));

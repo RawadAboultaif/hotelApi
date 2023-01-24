@@ -4,10 +4,8 @@ import com.company.hotelaria.hotel.builders.AddressBuilder;
 import com.company.hotelaria.hotel.builders.EmployeeBuilder;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.PaymentBuilder;
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.entities.Guest;
+import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.mapper.GuestMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.exception.BusinessException;
@@ -16,19 +14,16 @@ import com.company.hotelaria.hotel.repository.EmployeeRepository;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.repository.PaymentsRepository;
 import com.company.hotelaria.hotel.service.GuestService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -53,7 +48,7 @@ public class GuestServiceTest {
     private EmployeeRepository employeeRepository;
 
     @Test
-    public void testDeveListarTodosOsGuest() {
+    public void testMustListAllGuest() {
         when(guestRepository.findAll()).thenReturn(GuestBuilder.novaListaGuest());
         when(guestMapper.listEntityToListResponse(any())).thenReturn(GuestBuilder.novaListaDeGuestResponse());
 
@@ -63,7 +58,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveBuscarGuestPorCpfComSucesso() {
+    public void testMustFindGuestByCpf() {
 
         when(guestRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(guestMapper.entityToResponseFull(any())).thenReturn(GuestBuilder.novoGuestFullResponse());
@@ -78,7 +73,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testeDeveCadastrarGuestComSucesso() {
+    public void testMustSaveGuest() {
 
         when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
         when(guestRepository.save(any())).thenReturn(GuestBuilder.novoGuest());
@@ -97,7 +92,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarGuestComCpfJaCadastradoExecption1() {
+    public void testMustReturnErrorSavingGuestWithCpfAlreadyUsedExecption1() {
 
         when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
         when(guestRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
@@ -107,7 +102,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarGuestComCpfJaCadastradoExecption2() {
+    public void testMustReturnErrorSavingGuestWithCpfAlreadyUsedExecption2() {
 
         when(guestMapper.requestToEntity(any())).thenReturn(GuestBuilder.novoGuest());
         when(employeeRepository.findBySocialSecurityNumber(any())).thenReturn(Optional.of(EmployeeBuilder.novoEmployee()));
@@ -118,7 +113,7 @@ public class GuestServiceTest {
 
 
     @Test
-    public void testDeveAtualizarGuestComSucesso() {
+    public void testMustUpdateGuest() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(guestMapper.entityToResponse(any())).thenReturn(GuestBuilder.novoGuestResponse());
@@ -130,7 +125,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testeDeveRetornarErroAoAtualizarGuestParaUmCpfJaCadastradoException1() {
+    public void testMustReturnErrorUpdateGuestCpfToCpfAlreadyUsedException1() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuestComSocialSecurityNumberDiferente()));
 
@@ -141,7 +136,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testeDeveRetornarErroAoAtualizarGuestParaUmCpfJaCadastradoException2() {
+    public void testMustReturnErrorUpdateGuestCpfToCpfAlreadyUsedException2() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuestComSocialSecurityNumberDiferente()));
 
@@ -152,7 +147,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveDeletarGuestComSucesso() {
+    public void testMustDeleteGuest() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         doNothing().when(guestRepository).deleteById(any());
@@ -163,7 +158,7 @@ public class GuestServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoDeletarGuestComIdInexistente() {
+    public void testMustReturnErroDeletingGuestWithIdNonexistent() {
 
         when(guestRepository.findById(any())).thenThrow(Message.ID_DO_NOT_EXIST.asBusinessException());
 

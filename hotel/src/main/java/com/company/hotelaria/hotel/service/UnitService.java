@@ -1,11 +1,7 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.unit.UnitRequest;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
-import com.company.hotelaria.hotel.core.entities.Guest;
+import com.company.hotelaria.hotel.core.model.unit.UnitRequest;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.core.entities.Unit;
 import com.company.hotelaria.hotel.core.mapper.UnitMapper;
 import com.company.hotelaria.hotel.enums.Message;
@@ -38,6 +34,9 @@ public class UnitService {
     public UnitResponse save(@Valid UnitRequest request){
 
         log.info("save request = {}", request);
+        if(request.getPrice() <= 0 ||  request.getLimitGuest() <= 0) {
+            throw Message.UNIT_PRICE_OR_LIMITGUEST_UNDER_ZERO.asBusinessException();
+        }
         Unit unit = this.unitMapper.requestToEntity(request);
         unit.setStatus(UnitEnum.EMPTY);
         this.unitRepository.findByName(unit.getName()).ifPresent(p -> {
@@ -51,10 +50,13 @@ public class UnitService {
     @Transactional
     public UnitResponse update(@Valid UnitRequest request, Long id){
         log.info(" update request = {}", request);
+        if(request.getPrice() < 0 ||  request.getLimitGuest() < 0) {
+            throw Message.UNIT_PRICE_OR_LIMITGUEST_UNDER_ZERO.asBusinessException();
+        }
         Unit unit = this.unitRepository.findById(id).orElseThrow(Message.ID_DO_NOT_EXIST::asBusinessException);
         if(!request.getName().equalsIgnoreCase(unit.getName())) {
             this.unitRepository.findByName(request.getName()).ifPresent(p -> {
-                throw Message.UNIT_NAME_DO_NOT_EXIST.asBusinessException();
+                throw Message.UNIT_NAME_EXIST.asBusinessException();
             });
         }
         unit.updateUnit(

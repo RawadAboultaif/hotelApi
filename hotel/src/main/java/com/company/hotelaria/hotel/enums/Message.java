@@ -6,16 +6,22 @@ import org.springframework.http.HttpStatus;
 
 public enum Message {
 
-    SECURITY_NUMBER_IS_PRESENT("O Cpf ja esta cadastrado", HttpStatus.BAD_REQUEST),
-    ID_DO_NOT_EXIST("O id nao existe", HttpStatus.NOT_FOUND),
+    SECURITY_NUMBER_IS_PRESENT("Cpf already registered", HttpStatus.BAD_REQUEST),
+    ID_DO_NOT_EXIST("Id not found", HttpStatus.NOT_FOUND),
 
-    UNIT_ALREADY_OCCUPIED("O quarto não esta vazio", HttpStatus.BAD_REQUEST),
+    AGE_UNDER_EIGHTEEN("Age under eighteen", HttpStatus.BAD_REQUEST),
 
-    SECURITY_NUMBER_IS_NOT_PRESENT("O Cpf não esta cadastrado"),
+    RENT_CHECKIN_GREATER_THAN_CHECKOUT("Checkin não pode ser maior que o Checkout", HttpStatus.BAD_REQUEST),
 
-    UNIT_NAME_DO_NOT_EXIST("O número do quarto não existe", HttpStatus.NOT_FOUND),
+    UNIT_ALREADY_OCCUPIED("Room already occupied", HttpStatus.BAD_REQUEST),
 
-    UNIT_NAME_EXIST("O número do quarto ja esta cadastrado", HttpStatus.BAD_REQUEST)
+    SECURITY_NUMBER_IS_NOT_PRESENT("Cpf not registered", HttpStatus.NOT_FOUND),
+
+    UNIT_NAME_DO_NOT_EXIST("Room number does not exist", HttpStatus.NOT_FOUND),
+
+    UNIT_NAME_EXIST("Room number already exist", HttpStatus.BAD_REQUEST),
+
+    UNIT_PRICE_OR_LIMITGUEST_UNDER_ZERO("Room price or limit guest cannot be under zero", HttpStatus.BAD_REQUEST)
     ;
 
     private String value;

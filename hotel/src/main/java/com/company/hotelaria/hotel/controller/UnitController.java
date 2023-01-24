@@ -1,15 +1,8 @@
 package com.company.hotelaria.hotel.controller;
 
-import com.company.hotelaria.hotel.annotation.guest.GuestDeleteStandard;
-import com.company.hotelaria.hotel.annotation.guest.GuestSaveStandard;
-import com.company.hotelaria.hotel.annotation.guest.GuestUpdadeStandard;
-import com.company.hotelaria.hotel.annotation.payment.FindPaymentStandard;
 import com.company.hotelaria.hotel.annotation.unit.*;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
-import com.company.hotelaria.hotel.core.dto.unit.UnitRequest;
-import com.company.hotelaria.hotel.core.dto.unit.UnitResponse;
+import com.company.hotelaria.hotel.core.model.unit.UnitRequest;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.service.UnitService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -25,9 +18,9 @@ public class UnitController {
 
     private UnitService unitService;
 
-    @GetMapping("/{unitNumber}")
+    @GetMapping("/{unitName}")
     @FindUnitStandard
-    public ResponseEntity<UnitResponse> find(@PathVariable("unitNumber")String name)
+    public ResponseEntity<UnitResponse> find(@PathVariable("unitName")String name)
     { return ResponseEntity.ok(this.unitService.findByName(name)); }
 
     @PostMapping
@@ -43,7 +36,7 @@ public class UnitController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @UnitUpdadeStandard
     public ResponseEntity<UnitResponse> update(@RequestBody UnitRequest request, @PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(unitService.update(request, id));

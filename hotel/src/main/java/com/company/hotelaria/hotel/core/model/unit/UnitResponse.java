@@ -1,4 +1,4 @@
-package com.company.hotelaria.hotel.core.dto.unit;
+package com.company.hotelaria.hotel.core.model.unit;
 
 import com.company.hotelaria.hotel.enums.UnitEnum;
 import lombok.*;

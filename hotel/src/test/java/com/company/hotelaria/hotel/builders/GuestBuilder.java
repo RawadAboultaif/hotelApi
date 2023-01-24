@@ -1,12 +1,8 @@
 package com.company.hotelaria.hotel.builders;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestFullResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
+import com.company.hotelaria.hotel.core.model.guest.GuestRequest;
+import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
 
 import java.time.LocalDate;

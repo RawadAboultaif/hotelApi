@@ -3,8 +3,8 @@ package com.company.hotelaria.hotel.controller;
 import com.company.hotelaria.hotel.annotation.address.AddressDeleteStandard;
 import com.company.hotelaria.hotel.annotation.address.AddressSaveStandard;
 import com.company.hotelaria.hotel.annotation.address.FindAddressStandard;
-import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
+import com.company.hotelaria.hotel.core.model.address.AddressRequest;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.service.AddressService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -45,7 +45,7 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @AddressSaveStandard
     public ResponseEntity<AddressResponse> update(@RequestBody AddressRequest request, @PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(addressService.update(request, id));

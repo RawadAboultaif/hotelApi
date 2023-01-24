@@ -3,7 +3,7 @@ package com.company.hotelaria.hotel.tests.rentTests;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.RentBuilder;
 import com.company.hotelaria.hotel.builders.UnitBuilder;
-import com.company.hotelaria.hotel.core.dto.rent.RentResponse;
+import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.core.mapper.RentMapper;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import com.company.hotelaria.hotel.repository.GuestRepository;
@@ -12,7 +12,6 @@ import com.company.hotelaria.hotel.repository.UnitRepository;
 import com.company.hotelaria.hotel.service.RentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.Execution;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -38,7 +37,7 @@ public class RentServiceTest {
     private UnitRepository unitRepository;
 
     @Test
-    public void testDeveRetonarRentBuscadoporIdComSucesso() {
+    public void mustFindRentById() {
 
         when(rentMapper.entityToResponse(any())).thenReturn(RentBuilder.novoRentResponse());
         when(rentRepository.findById(any())).thenReturn(Optional.of(RentBuilder.novoRent()));
@@ -54,7 +53,7 @@ public class RentServiceTest {
     }
 
     @Test
-    public void testDeveCadastrarRentComSucesso() {
+    public void testMustSaveRent() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnit()));
@@ -72,7 +71,7 @@ public class RentServiceTest {
     }
 
     @Test
-    public void testDeveRetornarErroAoCadastrarRentComUnitStatusFull() {
+    public void testMustReturnErrorWhenSavingRentWithUnitStatusFull() {
 
         when(guestRepository.findById(any())).thenReturn(Optional.of(GuestBuilder.novoGuest()));
         when(unitRepository.findByName(any())).thenReturn(Optional.of(UnitBuilder.novoUnitStatusFull()));
@@ -82,7 +81,7 @@ public class RentServiceTest {
     }
 
     @Test
-    public void testDeveDeletarRentComSucesso() {
+    public void testMustDeleteRent() {
 
         when(rentRepository.findById(any())).thenReturn(Optional.of(RentBuilder.novoRent()));
         doNothing().when(rentRepository).deleteById(any());

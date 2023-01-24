@@ -1,15 +1,9 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.dto.address.AddressRequest;
-import com.company.hotelaria.hotel.core.dto.address.AddressResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentRequest;
-import com.company.hotelaria.hotel.core.dto.payment.PaymentResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
+import com.company.hotelaria.hotel.core.model.payment.PaymentRequest;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.entities.Payment;
-import com.company.hotelaria.hotel.core.mapper.GuestMapper;
 import com.company.hotelaria.hotel.core.mapper.PaymentMapper;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.GuestRepository;

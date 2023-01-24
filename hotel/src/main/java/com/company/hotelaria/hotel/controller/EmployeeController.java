@@ -1,12 +1,9 @@
 package com.company.hotelaria.hotel.controller;
 
 import com.company.hotelaria.hotel.annotation.employee.*;
-import com.company.hotelaria.hotel.annotation.guest.*;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeFullResponse;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeRequest;
-import com.company.hotelaria.hotel.core.dto.employee.EmployeeResponse;
-import com.company.hotelaria.hotel.core.dto.guest.GuestRequest;
-import com.company.hotelaria.hotel.core.dto.guest.GuestResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeFullResponse;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeRequest;
+import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
 import com.company.hotelaria.hotel.service.EmployeeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -24,13 +21,13 @@ public class EmployeeController {
 
     EmployeeService employeeService;
 
-    @GetMapping
+    @GetMapping("/list-all-guest")
     @ListAllEmployeeStandard
     public ResponseEntity<List<EmployeeResponse>> listAllEmployees() { return ResponseEntity.ok(this.employeeService.findAll()); }
 
-    @GetMapping("/{socialSecurityNumber}")
+    @GetMapping("/cpf/{cpf}")
     @FindEmployeebySocialSecurityNumberStandard
-    public ResponseEntity<EmployeeFullResponse> findBySocialSecurityNumber(@PathVariable("socialSecurityNumber") String socialSecurityNumber) {
+    public ResponseEntity<EmployeeFullResponse> findBySocialSecurityNumber(@PathVariable("cpf") String socialSecurityNumber) {
         return ResponseEntity.ok(this.employeeService.findBySocialSecurityNumber(socialSecurityNumber));
     }
 
@@ -47,7 +44,7 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @EmployeeUpdadeStandard
     public ResponseEntity<EmployeeResponse> update(@RequestBody EmployeeRequest request, @PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.update(request, id));
