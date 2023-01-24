@@ -1,8 +1,5 @@
 package com.company.hotelaria.hotel.enums;
 
-import lombok.AllArgsConstructor;
-
-
 public enum UnitEnum {
 
     EMPTY("E"),

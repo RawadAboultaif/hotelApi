@@ -1,7 +1,7 @@
 package com.company.hotelaria.hotel.repository;
 
-import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.entities.Payment;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

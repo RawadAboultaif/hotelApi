@@ -3,8 +3,8 @@ package com.company.hotelaria.hotel.tests.addressTest;
 import com.company.hotelaria.hotel.builders.AddressBuilder;
 import com.company.hotelaria.hotel.builders.EmployeeBuilder;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
-import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.core.mapper.AddressMapper;
+import com.company.hotelaria.hotel.core.model.address.AddressResponse;
 import com.company.hotelaria.hotel.repository.AddressRepository;
 import com.company.hotelaria.hotel.repository.EmployeeRepository;
 import com.company.hotelaria.hotel.repository.GuestRepository;
@@ -17,11 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {

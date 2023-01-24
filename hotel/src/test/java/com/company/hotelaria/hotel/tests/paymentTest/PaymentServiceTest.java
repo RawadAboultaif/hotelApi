@@ -2,8 +2,8 @@ package com.company.hotelaria.hotel.tests.paymentTest;
 
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.PaymentBuilder;
-import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.mapper.PaymentMapper;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.repository.PaymentsRepository;
 import com.company.hotelaria.hotel.service.PaymentService;
@@ -15,8 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

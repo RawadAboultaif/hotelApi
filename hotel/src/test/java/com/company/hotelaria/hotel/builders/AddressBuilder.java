@@ -1,8 +1,8 @@
 package com.company.hotelaria.hotel.builders;
 
+import com.company.hotelaria.hotel.core.entities.Address;
 import com.company.hotelaria.hotel.core.model.address.AddressRequest;
 import com.company.hotelaria.hotel.core.model.address.AddressResponse;
-import com.company.hotelaria.hotel.core.entities.Address;
 
 import java.util.ArrayList;
 import java.util.List;

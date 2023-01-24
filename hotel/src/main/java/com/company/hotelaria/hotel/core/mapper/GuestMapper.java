@@ -1,9 +1,9 @@
 package com.company.hotelaria.hotel.core.mapper;
 
+import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.model.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.entities.Guest;
 import org.mapstruct.Mapper;
 
 import java.util.List;

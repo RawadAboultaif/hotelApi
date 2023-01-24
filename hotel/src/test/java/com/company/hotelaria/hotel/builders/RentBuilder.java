@@ -1,8 +1,8 @@
 package com.company.hotelaria.hotel.builders;
 
+import com.company.hotelaria.hotel.core.entities.Rent;
 import com.company.hotelaria.hotel.core.model.rent.RentRequest;
 import com.company.hotelaria.hotel.core.model.rent.RentResponse;
-import com.company.hotelaria.hotel.core.entities.Rent;
 
 import java.time.LocalDate;
 

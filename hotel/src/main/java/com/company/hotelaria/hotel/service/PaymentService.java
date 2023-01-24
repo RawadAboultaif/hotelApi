@@ -1,10 +1,10 @@
 package com.company.hotelaria.hotel.service;
 
-import com.company.hotelaria.hotel.core.model.payment.PaymentRequest;
-import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.entities.Payment;
 import com.company.hotelaria.hotel.core.mapper.PaymentMapper;
+import com.company.hotelaria.hotel.core.model.payment.PaymentRequest;
+import com.company.hotelaria.hotel.core.model.payment.PaymentResponse;
 import com.company.hotelaria.hotel.enums.Message;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.repository.PaymentsRepository;

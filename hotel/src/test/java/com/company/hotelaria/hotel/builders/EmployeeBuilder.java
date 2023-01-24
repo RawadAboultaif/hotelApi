@@ -1,9 +1,9 @@
 package com.company.hotelaria.hotel.builders;
 
+import com.company.hotelaria.hotel.core.entities.Employee;
 import com.company.hotelaria.hotel.core.model.employee.EmployeeFullResponse;
 import com.company.hotelaria.hotel.core.model.employee.EmployeeRequest;
 import com.company.hotelaria.hotel.core.model.employee.EmployeeResponse;
-import com.company.hotelaria.hotel.core.entities.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

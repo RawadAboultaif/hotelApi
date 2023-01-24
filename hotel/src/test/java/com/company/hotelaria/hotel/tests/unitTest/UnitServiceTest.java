@@ -1,8 +1,8 @@
 package com.company.hotelaria.hotel.tests.unitTest;
 
 import com.company.hotelaria.hotel.builders.UnitBuilder;
-import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.core.mapper.UnitMapper;
+import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
 import com.company.hotelaria.hotel.enums.UnitEnum;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import com.company.hotelaria.hotel.repository.UnitRepository;
@@ -15,8 +15,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

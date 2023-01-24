@@ -2,7 +2,10 @@ package com.company.hotelaria.hotel.core.model.rent;
 
 import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
 import com.company.hotelaria.hotel.core.model.unit.UnitResponse;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 

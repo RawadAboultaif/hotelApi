@@ -3,8 +3,8 @@ package com.company.hotelaria.hotel.tests.rentTests;
 import com.company.hotelaria.hotel.builders.GuestBuilder;
 import com.company.hotelaria.hotel.builders.RentBuilder;
 import com.company.hotelaria.hotel.builders.UnitBuilder;
-import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.core.mapper.RentMapper;
+import com.company.hotelaria.hotel.core.model.rent.RentResponse;
 import com.company.hotelaria.hotel.exception.BusinessException;
 import com.company.hotelaria.hotel.repository.GuestRepository;
 import com.company.hotelaria.hotel.repository.RentRepository;
@@ -18,8 +18,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

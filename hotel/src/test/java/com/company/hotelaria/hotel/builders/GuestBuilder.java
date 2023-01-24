@@ -1,9 +1,9 @@
 package com.company.hotelaria.hotel.builders;
 
+import com.company.hotelaria.hotel.core.entities.Guest;
 import com.company.hotelaria.hotel.core.model.guest.GuestFullResponse;
 import com.company.hotelaria.hotel.core.model.guest.GuestRequest;
 import com.company.hotelaria.hotel.core.model.guest.GuestResponse;
-import com.company.hotelaria.hotel.core.entities.Guest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +13,12 @@ public class GuestBuilder {
 
     public static GuestRequest novoGuestRequest() {
         return criarGuestRequest();
+    }
+
+    public static GuestRequest guestMenorDeIdade() {
+        GuestRequest novoGuest = criarGuestRequest();
+        novoGuest.setDateOfBirth(LocalDate.of(2009, 10,19));
+        return novoGuest;
     }
 
     public static Guest novoGuest() {
